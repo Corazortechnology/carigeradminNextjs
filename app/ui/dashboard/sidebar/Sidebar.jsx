@@ -1,18 +1,20 @@
+"use client";
+
 import styles from "../sidebar/sidebar.module.css";
 import {
   MdDashboard,
   MdSupervisedUserCircle,
   MdShoppingBag,
   MdAttachMoney,
-  MdWork,
-  MdAnalytics,
-  MdPeople,
-  MdOutlineSettings,
-  MdHelpCenter,
+
   MdLogout,
 } from "react-icons/md";
 import MenuLinks from "./menuLink/menuLink";
 import Image from "next/image";
+import { useSelector, useDispatch } from "react-redux";
+
+import { logout } from "@/app/slices/userSlics";
+import { useRouter } from "next/navigation";
 
 const menuItems = [
   {
@@ -29,55 +31,68 @@ const menuItems = [
         icon: <MdSupervisedUserCircle />,
       },
       {
-        title: "Products",
-        path: "/dashboard/products",
+        title: "Labours",
+        path: "/dashboard/labours",
         icon: <MdShoppingBag />,
       },
       {
-        title: "Transactions",
-        path: "/dashboard/transactions",
+        title: "Orders",
+        path: "/dashboard/orders",
         icon: <MdAttachMoney />,
       },
     ],
   },
-  {
-    title: "Analytics",
-    list: [
-      {
-        title: "Revenue",
-        path: "/dashboard/revenue",
-        icon: <MdWork />,
-      },
-      {
-        title: "Reports",
-        path: "/dashboard/reports",
-        icon: <MdAnalytics />,
-      },
-      {
-        title: "Teams",
-        path: "/dashboard/teams",
-        icon: <MdPeople />,
-      },
-    ],
-  },
-  {
-    title: "User",
-    list: [
-      {
-        title: "Settings",
-        path: "/dashboard/settings",
-        icon: <MdOutlineSettings />,
-      },
-      {
-        title: "Help",
-        path: "/dashboard/help",
-        icon: <MdHelpCenter />,
-      },
-    ],
-  },
+  // {
+  //   title: "Analytics",
+  //   list: [
+  //     {
+  //       title: "Revenue",
+  //       path: "/dashboard/revenue",
+  //       icon: <MdWork />,
+  //     },
+  //     {
+  //       title: "Reports",
+  //       path: "/dashboard/reports",
+  //       icon: <MdAnalytics />,
+  //     },
+  //     {
+  //       title: "Teams",
+  //       path: "/dashboard/teams",
+  //       icon: <MdPeople />,
+  //     },
+  //   ],
+  // },
+  // {                                              //future use cases {}
+  //   title: "User",
+  //   list: [
+  //     {
+  //       title: "Settings",
+  //       path: "/dashboard/settings",
+  //       icon: <MdOutlineSettings />,
+  //     },
+  //     {
+  //       title: "Help",
+  //       path: "/dashboard/help",
+  //       icon: <MdHelpCenter />,
+  //     },
+  //   ],
+  // },
 ];
 
 const Sidebar = () => {
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
+  const router =useRouter()
+console.log("user",user)
+  
+  const handleLogout = () => {
+    dispatch(logout());
+    router.push("/login");
+  };
+console.log(user)
+
+
+
   return (
     <div className={styles.container}>
       <div className={styles.user}>
@@ -89,8 +104,8 @@ const Sidebar = () => {
           height="50"
         />
         <div className={styles.userDetail}>
-          <span className={styles.username}>John Doe</span>
-          <span className={styles.userTitle}>Admin</span>
+          <span className={styles.username}>{user?.name }</span>
+          <span className={styles.userTitle}>{user?.role || "Admin"}</span>
         </div>
       </div>
       <ul className={styles.list}>
@@ -103,9 +118,10 @@ const Sidebar = () => {
           </li>
         ))}
       </ul>
-      <button className={styles.logout}>
-        <MdLogout/>
-         Logout</button>
+      <button onClick={handleLogout} className={styles.logout}>
+        <MdLogout />
+        Logout
+      </button>
     </div>
   );
 };

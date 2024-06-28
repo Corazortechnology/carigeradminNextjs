@@ -3,10 +3,16 @@
 import styles from "./loginForm.module.css";
 import { useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation"
+import { login } from "@/app/slices/userSlics";
+// import { login } from "../../../slices/userSlics";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -16,7 +22,8 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:4040/api/v1/auth/adminLogin", formData);
-      console.log(response.data);
+      dispatch(login(response.data.user));
+      router.push("/dashboard"); // Navigate to the dashboard
     } catch (err) {
       setError("Error logging in");
     }

@@ -48,6 +48,8 @@
     padding: 20px;
     margin: 5px 0px;
     display: flex;
+    margin-left: 20px;
+    margin-top: 200px;
     align-items: center;
     gap: 10px;
     cursor: pointer;
