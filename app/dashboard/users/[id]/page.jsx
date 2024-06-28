@@ -7,27 +7,42 @@ import Image from "next/image";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-const SingleUserPage =  async ({ params }) => {
+const SingleUserPage = async ({ params }) => {
   const { id } = params;
   const user = await fetchSingleUser(id);
   console.log(user);
 
 
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const userData = Object.fromEntries(formData.entries());
     userData.id = id;
 
+    // try {
+    //   await updateUser(userData);
+    //   toast.success("User updated successfully!", {
+    //     onClose: () => {
+    //       window.location.href = "/dashboard/users"; 
+    //     }
+    //   });
+    // } catch (error) {
+    //   toast.error("Failed to update user!");
+    // }
+
     try {
       await updateUser(userData);
       toast.success("User updated successfully!", {
         onClose: () => {
-          window.location.href = "/dashboard/users"; 
+          if (typeof window !== 'undefined') {
+            window.location.href = "/dashboard/users";
+            return false;
+          }
         }
       });
     } catch (error) {
+      console.error("Error updating user:", error);
       toast.error("Failed to update user!");
     }
   };
