@@ -31,9 +31,10 @@ const UsersPage = ({ searchParams }) => {
   
 
   const handleBlacklist = async (userId) => {
+    // const response = await axios.post(`${URL}api/v1/auth/adminLogin`, formData);
     try {
       const response = await axios.put(
-        `http://localhost:4040/api/v1/auth/users/blacklistuser/${userId}`
+        `${URL}/api/v1/auth/users/blacklistuser/${userId}`
       );
       if (response.status === 200) {
         // Refetch users after updating blacklist status

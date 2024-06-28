@@ -9,7 +9,7 @@ export const addUser = async (userId) => {
     console.log(userId)
   try {
     const response = await axios.put(
-      `http://localhost:4040/api/v1/users/blacklistuser/${userId}`
+      `https://cariger-user-provider.onrender.com/api/v1/users/blacklistuser/${userId}`
     );
     console.log("User blacklisted successfully:", response.data);
   } catch (err) {
@@ -24,7 +24,7 @@ export const addUser = async (userId) => {
 
 export const updateUser = async (user) => {
   try {
-    const response = await axios.put(`http://localhost:4040/api/v1/auth/userUpdate/${user.id}`, user);
+    const response = await axios.put(`https://cariger-user-provider.onrender.com/api/v1/auth/userUpdate/${user.id}`, user);
     if (response.status === 200) {
       return response.data;
     }
@@ -43,7 +43,7 @@ export const addLabor = async (formData) => {
   console.log(" Labour add called")
   try {
     const response = await axios.post(
-      `http://localhost:4040/api/v1/auth/laborRegister`,
+      `https://cariger-user-provider.onrender.com/api/v1/auth/laborRegister`,
       formData
     );
     console.log("Labor added successfully:", response.data);
@@ -63,7 +63,7 @@ export const updateLabor = async (id, laborData) => {
 
   console.log(laborData)
   try {
-    const response = await axios.put(`http://localhost:4040/api/v1/auth/updateLabor/${id}`, laborData);
+    const response = await axios.put(`https://cariger-user-provider.onrender.com/api/v1/auth/updateLabor/${id}`, laborData);
     return response.data;
   } catch (error) {
     console.error("Failed to update labor:", error);

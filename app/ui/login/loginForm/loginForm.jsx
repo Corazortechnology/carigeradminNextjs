@@ -6,7 +6,8 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation"
 import { login } from "@/app/slices/userSlics";
-// import { login } from "../../../slices/userSlics";
+import URL from "@/app/constants";
+
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -21,7 +22,8 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:4040/api/v1/auth/adminLogin", formData);
+      const response = await axios.post(`https://cariger-user-provider.onrender.com/api/v1/auth/adminLogin`, formData);
+      // const response = await axios.post("http://localhost:4040/api/v1/auth/adminLogin", formData);
       dispatch(login(response.data.user));
       router.push("/dashboard"); // Navigate to the dashboard
     } catch (err) {

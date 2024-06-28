@@ -10,8 +10,9 @@ import { useSelector } from 'react-redux';
 
 
 export const fetchUsers = async () => {
+  
   try {
-      const response = await axios.get(`http://localhost:4040/api/v1/auth/users`);
+      const response = await axios.get(`https://cariger-user-provider.onrender.com/api/v1/auth/users`);
     //   console.log(response.data)
 
       return response.data;
@@ -23,7 +24,7 @@ export const fetchUsers = async () => {
 
 export const fetchSingleUser = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:4040/api/v1/auth/user/${id}`);
+      const response = await axios.get(`https://cariger-user-provider.onrender.com/api/v1/auth/user/${id}`);
     //   console.log(response.data)
       return response.data;
     } catch (error) {
@@ -46,7 +47,7 @@ export const deleteUser = async (id) => {
 
 export const fetchLabours = async () => {
   try {
-    const response = await axios.get(`http://localhost:4040/api/v1/auth/labors`, {
+    const response = await axios.get(`https://cariger-user-provider.onrender.com/api/v1/auth/labors`, {
     
     });
   //   console.log(response.data)
@@ -62,7 +63,7 @@ export const fetchLabours = async () => {
 export const fetchSingleLabour = async (id) => {
   console.log("fetchsiinglelabour")
   try {
-    const response = await axios.get(`http://localhost:4040/api/v1/auth/labor/${id}`);
+    const response = await axios.get(`https://cariger-user-provider.onrender.com/api/v1/auth/labor/${id}`);
     return response.data;
   } catch (error) {
     console.error("Failed to fetch user:", error);
@@ -74,7 +75,7 @@ export const fetchSingleLabour = async (id) => {
 
 export const fetchOrders = async () => {
   try {
-    const response = await axios.get(`http://localhost:4040/api/v1/auth/getallorders`, {
+    const response = await axios.get(`https://cariger-user-provider.onrender.com/api/v1/auth/getallorders`, {
     
     });
   //   console.log(response.data)

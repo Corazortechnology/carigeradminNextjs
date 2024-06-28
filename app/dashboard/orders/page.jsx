@@ -8,13 +8,13 @@ import { fetchOrders } from "@/app/slices/orderSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const OrdersPage = ({ searchParams }) => {
+const OrdersPage =  ({ searchParams }) => {
   const dispatch = useDispatch();
   const { orders, loading, error } = useSelector((state) => state.orders);
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => {
-    dispatch(fetchOrders());
+  useEffect (async() => {
+   await dispatch(fetchOrders());
   }, [dispatch]);
 
   // Filter orders
