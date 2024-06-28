@@ -13,8 +13,8 @@ const OrdersPage =  ({ searchParams }) => {
   const { orders, loading, error } = useSelector((state) => state.orders);
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect (async() => {
-   await dispatch(fetchOrders());
+  useEffect(() => {
+    dispatch(fetchOrders());
   }, [dispatch]);
 
   // Filter orders
