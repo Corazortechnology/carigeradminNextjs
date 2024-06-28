@@ -9,7 +9,7 @@ import {
 
   MdLogout,
 } from "react-icons/md";
-import MenuLinks from "./menuLink/menuLink";
+import MenuLinks from "./menuLink/MenuLink";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 
