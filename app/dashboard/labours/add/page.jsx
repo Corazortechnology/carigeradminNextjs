@@ -18,10 +18,26 @@ const AddLaborPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+
+    if (name === "phone") {
+      let formattedValue = value.replace(/\D/g, ''); // Remove all non-digit characters
+
+      if (formattedValue.length > 5) {
+        formattedValue = +91${formattedValue.slice(0, 5)} ${formattedValue.slice(5, 10)};
+      } else {
+        formattedValue = +91${formattedValue};
+      }
+
+      setFormData({
+        ...formData,
+        [name]: formattedValue,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -33,7 +49,6 @@ const AddLaborPage = () => {
     } else {
       toast.error(result.message);
     }
-
   };
 
   return (
@@ -48,7 +63,7 @@ const AddLaborPage = () => {
           required
         />
         <input
-          type="phone"
+          type="text"
           placeholder="Phone"
           name="phone"
           value={formData.phone}
